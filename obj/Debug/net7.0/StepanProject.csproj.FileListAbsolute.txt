@@ -1,0 +1,15 @@
+C:\Users\marti\source\repos\StepanProject\bin\Debug\net7.0\StepanProject.exe
+C:\Users\marti\source\repos\StepanProject\bin\Debug\net7.0\StepanProject.deps.json
+C:\Users\marti\source\repos\StepanProject\bin\Debug\net7.0\StepanProject.runtimeconfig.json
+C:\Users\marti\source\repos\StepanProject\bin\Debug\net7.0\StepanProject.dll
+C:\Users\marti\source\repos\StepanProject\bin\Debug\net7.0\StepanProject.pdb
+C:\Users\marti\source\repos\StepanProject\obj\Debug\net7.0\StepanProject.csproj.AssemblyReference.cache
+C:\Users\marti\source\repos\StepanProject\obj\Debug\net7.0\StepanProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marti\source\repos\StepanProject\obj\Debug\net7.0\StepanProject.AssemblyInfoInputs.cache
+C:\Users\marti\source\repos\StepanProject\obj\Debug\net7.0\StepanProject.AssemblyInfo.cs
+C:\Users\marti\source\repos\StepanProject\obj\Debug\net7.0\StepanProject.csproj.CoreCompileInputs.cache
+C:\Users\marti\source\repos\StepanProject\obj\Debug\net7.0\StepanProject.dll
+C:\Users\marti\source\repos\StepanProject\obj\Debug\net7.0\refint\StepanProject.dll
+C:\Users\marti\source\repos\StepanProject\obj\Debug\net7.0\StepanProject.pdb
+C:\Users\marti\source\repos\StepanProject\obj\Debug\net7.0\StepanProject.genruntimeconfig.cache
+C:\Users\marti\source\repos\StepanProject\obj\Debug\net7.0\ref\StepanProject.dll
