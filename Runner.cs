@@ -14,9 +14,10 @@ namespace StepanProject
             Parser parser = new Parser();
             Exporter exporter = new Exporter();
 
-            da.GetData(false);
 
-            string returnedRate = parser.ReturnRate(currency.ToUpper(), date);
+            var products = da.GetData(false);
+            string returnedRate = parser.ReturnRate(currency.ToUpper(), date);\
+            exporter.Export(products, returnedRate);
         }
     }
 }

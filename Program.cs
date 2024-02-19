@@ -8,6 +8,10 @@
             {
                 throw new ApplicationException("Wrong amount of parameters");
             }
+            else if (args[1].Length != 6)
+            {
+                throw new ApplicationException("Date is in wrong format (yyyymmdd)");
+            }
 
             var app = new Runner();
             app.Run(args[0], args[1]);
