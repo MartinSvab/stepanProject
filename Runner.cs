@@ -10,8 +10,13 @@ namespace StepanProject
     {
         public void Run(string currency, string date)
         {
+            DatabaseAccesser da = new DatabaseAccesser();
             Parser parser = new Parser();
-            Console.WriteLine(parser.ReturnRate(currency.ToUpper(), date));
+            Exporter exporter = new Exporter();
+
+            da.GetData(false);
+
+            string returnedRate = parser.ReturnRate(currency.ToUpper(), date);
         }
     }
 }

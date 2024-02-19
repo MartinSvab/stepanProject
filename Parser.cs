@@ -8,15 +8,11 @@ namespace StepanProject
         public string ReturnRate(string currency, string date)
         {
             string[] data = GetData("https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/rok.txt?rok=2024").Split("\n");
-
-            if(!doesCurrencyExist(currency, data))
-            {
-                throw new Exception("Currency is not in database");
-            }
+            date = FormatDate(date);
+            if(!doesCurrencyExist(currency, data)) throw new Exception("Currency is not in database");
             
             string dateToCompare = date == null ? DateTime.Now.ToString("dd.mm.yyyy") : date;
             int currencyIndex = 0;
-            bool found = false;
 
             for (int i = 0; i < data[0].Split("|").Length; i++)
             {
@@ -27,10 +23,7 @@ namespace StepanProject
                         break;
                     }
                 }
-                catch(IndexOutOfRangeException e)
-                {
-
-                }
+                catch(IndexOutOfRangeException e){}
             }
 
             for (int i = 0; i < data.Length; i++)
@@ -38,23 +31,17 @@ namespace StepanProject
                 if (dateToCompare == data[i].Split("|")[0]){
                     Console.WriteLine("DATE FOUND!!!");
                     Console.WriteLine($"{data[0].Split("|")[currencyIndex].Split(" ")[0]} {currency} = {data[i].Split("|")[currencyIndex]} CZK");
-                    found = true;
                     return data[i].Split("|")[currencyIndex];
                 }
             }
 
-            if (!found)
-            {
-                Console.WriteLine("DATE NOT FOUND!!!");
-                Console.WriteLine($"Date instead: {data[data.Length - 2].Split("|")[0]}");
-                Console.WriteLine($"{data[0].Split("|")[currencyIndex].Split(" ")[0]} {currency} = {data[data.Length - 2].Split("|")[currencyIndex]} CZK");
-                return data[data.Length - 2].Split("|")[currencyIndex]; ;
-            }
-
-            return null;
+            Console.WriteLine("DATE NOT FOUND!!!");
+            Console.WriteLine($"Date instead: {data[data.Length - 2].Split("|")[0]}");
+            Console.WriteLine($"{data[0].Split("|")[currencyIndex].Split(" ")[0]} {currency} = {data[data.Length - 2].Split("|")[currencyIndex]} CZK");
+            return data[data.Length - 2].Split("|")[currencyIndex]; ;
         }
 
-        public string GetData(string args)
+        string GetData(string args)
         {
             if (args == null || args.Length == 0)
             {
@@ -86,6 +73,17 @@ namespace StepanProject
                 }
             }
             return false;
+        }
+
+        string FormatDate(string date)
+        {
+            string[] formattedDate = new string[3];
+
+            formattedDate[0] = date.Substring(0, 4);
+            formattedDate[1] = date.Substring(4, 2);
+            formattedDate[2] = date.Substring(6, 2);
+
+            return String.Join(".", formattedDate);
         }
     }
 }
