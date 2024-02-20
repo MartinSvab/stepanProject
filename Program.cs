@@ -8,7 +8,7 @@
             {
                 throw new ApplicationException("Wrong amount of parameters");
             }
-            else if (args[1].Length != 6)
+            else if (args[1].Length != 8)
             {
                 throw new ApplicationException("Date is in wrong format (yyyymmdd)");
             }

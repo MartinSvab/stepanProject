@@ -5,7 +5,7 @@ namespace StepanProject
 {
     internal class Parser
     {
-        public string ReturnRate(string currency, string date)
+        public string[] ReturnRate(string currency, string date)
         {
             string[] data = GetData("https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/rok.txt?rok=2024").Split("\n");
             date = FormatDate(date);
@@ -26,19 +26,25 @@ namespace StepanProject
                 catch(IndexOutOfRangeException e){}
             }
 
+            string[] toReturn = new string[2];
+
             for (int i = 0; i < data.Length; i++)
             {
                 if (dateToCompare == data[i].Split("|")[0]){
                     Console.WriteLine("DATE FOUND!!!");
                     Console.WriteLine($"{data[0].Split("|")[currencyIndex].Split(" ")[0]} {currency} = {data[i].Split("|")[currencyIndex]} CZK");
-                    return data[i].Split("|")[currencyIndex];
+                    toReturn[0] = data[i].Split("|")[currencyIndex];
+                    toReturn[1] = i.ToString();
+                    return toReturn;
                 }
             }
 
             Console.WriteLine("DATE NOT FOUND!!!");
             Console.WriteLine($"Date instead: {data[data.Length - 2].Split("|")[0]}");
             Console.WriteLine($"{data[0].Split("|")[currencyIndex].Split(" ")[0]} {currency} = {data[data.Length - 2].Split("|")[currencyIndex]} CZK");
-            return data[data.Length - 2].Split("|")[currencyIndex]; ;
+            toReturn[0] = data[data.Length - 2].Split("|")[currencyIndex];
+            toReturn[1] = (data.Length - 2).ToString();
+            return toReturn;
         }
 
         string GetData(string args)
@@ -68,9 +74,7 @@ namespace StepanProject
                         return true;
                     }
                 }
-                catch (IndexOutOfRangeException e)
-                {
-                }
+                catch (IndexOutOfRangeException e){}
             }
             return false;
         }
@@ -80,8 +84,8 @@ namespace StepanProject
             string[] formattedDate = new string[3];
 
             formattedDate[0] = date.Substring(0, 4);
-            formattedDate[1] = date.Substring(4, 2);
-            formattedDate[2] = date.Substring(6, 2);
+            formattedDate[1] = date.Substring(3, 2);
+            formattedDate[2] = date.Substring(5, 2);
 
             return String.Join(".", formattedDate);
         }

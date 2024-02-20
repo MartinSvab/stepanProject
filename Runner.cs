@@ -16,8 +16,8 @@ namespace StepanProject
 
 
             var products = da.GetData(false);
-            string returnedRate = parser.ReturnRate(currency.ToUpper(), date);\
-            exporter.Export(products, returnedRate);
+            string[] returnedRate = parser.ReturnRate(currency.ToUpper(), date);
+            exporter.Export(products, returnedRate[0], returnedRate[1]);
         }
     }
 }

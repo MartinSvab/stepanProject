@@ -23,6 +23,7 @@ namespace StepanProject
                     }
                 }
             }
+
             if(!getItemsWithNullPrice ) 
             {
                 for (int i = 0; i < list.Count; i++)
@@ -33,7 +34,23 @@ namespace StepanProject
                     }
                 }
             }
+
+            //FUCKING CHECKING IF THE NAME IS FORMATTED RIGHT BECAUSE SOMEONE DEOSNT KNOW HOW TO FORMAT HIS FUCKINFG DATABSE
+            for(int i = 0; i < list.Count; i++) if (list[i].Split(",").Length == 3) list[i] = ReplaceAt(list[i], list[i].IndexOf(',', 0),'-');
+            
             return list;
+        }
+
+        public static string ReplaceAt(string input, int index, char newChar)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException("input");
+            }
+            char[] chars = input.ToCharArray();
+            chars[index] = newChar;
+            return new string(chars);
         }
     }
 }
+
