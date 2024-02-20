@@ -10,61 +10,67 @@ namespace StepanProject
         {
             var toExport = new List<Row> { };
 
-            toExport.Add(new Row
-            {
-                Date = "Date",
-                EPName = "English Product Name",
-                PriceUSD = "Price in USD",
-                PriceCZK = "Price in CZK",
-                ConversionDate = "Date of currency conversation"
-            });
-
             for (int i = 0; i < products.Count; i++)
             {
-                toExport.Add(new Row
-                {
-                    Date = DateTime.Now.ToString("yyyy.mm.dd:hh.mm.ss"),
-                    EPName = products[i].Split(",")[0],
-                    PriceUSD = (checkIfHasCost(products[i])).ToString(),
-                    PriceCZK = (checkIfHasCost(products[i]) * double.Parse(rate)).ToString(),
+                double priceUSD = checkIfHasCost(products[i]);
+                double priceCZK = priceUSD * double.Parse(rate.Replace(',','.'));
+
+                toExport.Add(new Row{
+                    Date = DateTime.Now.ToString("yyyy.MM.dd-HH:mm:ss"),
+                    EnglishProductName = products[i].Split(",")[0],
+                    PriceUSD = priceUSD,
+                    PriceCZK = priceCZK,
                     ConversionDate = rateDate
                 });
             }
 
-            using (var writer = new StreamWriter($"../{DateTime.Now.ToString("yyyy.mm.dd.hh.mm.ss")}-adventureworks.csv"))
+            string fileNameOrLikePathIG = $"../{DateTime.Now.ToString("yyyy.MM.dd-HH-mm-ss")}-adventureworks.csv";
+
+            using (var writer = new StreamWriter(fileNameOrLikePathIG))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
                 csv.WriteRecords(toExport);
             }
+
+            Console.WriteLine($"\n\nData saved to {Path.GetFullPath(fileNameOrLikePathIG)}\nPress any button to exit");
+
+            Console.ReadKey();
         }
 
         double checkIfHasCost(string product)
         {
-            double output;
+            double output = 0;
 
-            Console.WriteLine(product.Split(",")[1].Replace(',', '.'));
-            Console.WriteLine(double.TryParse(product.Split(",")[1].Replace(',', '.'), CultureInfo.CurrentCulture, out output));
-            try { Console.WriteLine(double.Parse(product.Split(",")[1].Replace(',', '.'))); }
-            catch (FormatException e) 
+            for (int i = 0; i < product.Length; i++)
             {
-                Console.WriteLine(e);
+                if (product[i] == ',')
+                {
+                    try { return double.Parse(product.Substring(i + 1).Trim()); }
+                    catch (FormatException e) { }
+                }
             }
 
-            if (double.TryParse(product.Split(",")[1].Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out output))
-            {
-
-                return output; 
-            }
-            else return 0;
+            return output;
         }
-    }
 
-    public class Row
-    {
-        public string Date { get; set; }
-        public string EPName { get; set; }
-        public string PriceUSD { get; set; }
-        public string PriceCZK { get; set; }
-        public string ConversionDate { get; set; }
+        public static string ReplaceAt(string input, int index, char newChar)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException("input");
+            }
+            char[] chars = input.ToCharArray();
+            chars[index] = newChar;
+            return new string(chars);
+        }
+
+        public class Row
+        {
+            public string Date { get; set; }
+            public string EnglishProductName { get; set; }
+            public double PriceUSD { get; set; }
+            public double PriceCZK { get; set; }
+            public string ConversionDate { get; set; }
+        }
     }
 }

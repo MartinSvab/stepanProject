@@ -31,19 +31,16 @@ namespace StepanProject
             for (int i = 0; i < data.Length; i++)
             {
                 if (dateToCompare == data[i].Split("|")[0]){
-                    Console.WriteLine("DATE FOUND!!!");
-                    Console.WriteLine($"{data[0].Split("|")[currencyIndex].Split(" ")[0]} {currency} = {data[i].Split("|")[currencyIndex]} CZK");
                     toReturn[0] = data[i].Split("|")[currencyIndex];
-                    toReturn[1] = i.ToString();
+                    toReturn[1] = data[i].Split("|")[0];
                     return toReturn;
                 }
             }
 
             Console.WriteLine("DATE NOT FOUND!!!");
             Console.WriteLine($"Date instead: {data[data.Length - 2].Split("|")[0]}");
-            Console.WriteLine($"{data[0].Split("|")[currencyIndex].Split(" ")[0]} {currency} = {data[data.Length - 2].Split("|")[currencyIndex]} CZK");
             toReturn[0] = data[data.Length - 2].Split("|")[currencyIndex];
-            toReturn[1] = (data.Length - 2).ToString();
+            toReturn[1] = data[(data.Length - 2)].Split("|")[0];
             return toReturn;
         }
 
