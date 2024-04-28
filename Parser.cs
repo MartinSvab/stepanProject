@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Net;
+using System.Xml;
 
 namespace StepanProject
 {
@@ -7,8 +8,8 @@ namespace StepanProject
     {
         public string[] ReturnRate(string currency, string date)
         {
-            string[] data = GetData("https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/rok.txt?rok=2024").Split("\n");
             date = FormatDate(date);
+            string[] data = GetData($"https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/rok.txt?rok={date.Split(".")[2]}").Split("\n");
             if(!doesCurrencyExist(currency, data)) throw new Exception("Currency is not in database");
             
             string dateToCompare = date == null ? DateTime.Now.ToString("dd.mm.yyyy") : date;
@@ -26,6 +27,8 @@ namespace StepanProject
                 catch(IndexOutOfRangeException e){}
             }
 
+            //[0] = conversion rate
+            //[1] = conversion date
             string[] toReturn = new string[2];
 
             for (int i = 0; i < data.Length; i++)
@@ -41,6 +44,7 @@ namespace StepanProject
             Console.WriteLine($"Date instead: {data[data.Length - 2].Split("|")[0]}");
             toReturn[0] = data[data.Length - 2].Split("|")[currencyIndex];
             toReturn[1] = data[(data.Length - 2)].Split("|")[0];
+            Console.WriteLine(toReturn[0]);
             return toReturn;
         }
 
@@ -80,9 +84,9 @@ namespace StepanProject
         {
             string[] formattedDate = new string[3];
 
-            formattedDate[0] = date.Substring(0, 4);
-            formattedDate[1] = date.Substring(3, 2);
-            formattedDate[2] = date.Substring(5, 2);
+            formattedDate[0] = date.Substring(0, 2);
+            formattedDate[1] = date.Substring(2, 2);
+            formattedDate[2] = date.Substring(4, 4);
 
             return String.Join(".", formattedDate);
         }

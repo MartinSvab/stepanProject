@@ -10,7 +10,7 @@
             }
             else if (args[1].Length != 8)
             {
-                throw new ApplicationException("Date is in wrong format (yyyymmdd)");
+                throw new ApplicationException("Date is in wrong format (ddmmyyyy)");
             }
 
             var app = new Runner();

@@ -100,3 +100,5 @@ C:\Users\marti\source\repos\StepanProject\bin\Debug\net7.0\runtimes\win\lib\net6
 C:\Users\marti\source\repos\StepanProject\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\marti\source\repos\StepanProject\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\marti\source\repos\StepanProject\obj\Debug\net7.0\StepanProject.csproj.CopyComplete
+C:\Users\maste\source\repos\stepanProject\bin\Debug\net7.0\CsvHelper.dll
+C:\Users\maste\source\repos\stepanProject\bin\Debug\net7.0\System.Linq.Async.dll

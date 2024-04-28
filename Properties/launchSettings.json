@@ -2,7 +2,7 @@
   "profiles": {
     "StepanProject": {
       "commandName": "Project",
-      "commandLineArgs": "usd 12345678"
+      "commandLineArgs": "usd 12122023"
     }
   }
 }

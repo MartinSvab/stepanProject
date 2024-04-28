@@ -24,7 +24,7 @@ namespace StepanProject
                 }
             }
 
-            if(!getItemsWithNullPrice ) 
+            if (!getItemsWithNullPrice ) 
             {
                 for (int i = 0; i < list.Count; i++)
                 {
@@ -35,7 +35,6 @@ namespace StepanProject
                 }
             }
 
-            //FUCKING CHECKING IF THE NAME IS FORMATTED RIGHT BECAUSE SOMEONE DEOSNT KNOW HOW TO FORMAT HIS FUCKINFG DATABSE
             for(int i = 0; i < list.Count; i++) if (list[i].Split(",").Length == 3) list[i] = ReplaceAt(list[i], list[i].IndexOf(',', 0),'-');
             
             return list;
