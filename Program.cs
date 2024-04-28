@@ -4,17 +4,19 @@
     {
         static void Main(string[] args)
         {
-            if(args.Length != 2)
-            {
-                throw new ApplicationException("Wrong amount of parameters");
-            }
-            else if (args[1].Length != 8)
-            {
-                throw new ApplicationException("Date is in wrong format (ddmmyyyy)");
-            }
-
             var app = new Runner();
-            app.Run(args[0], args[1]);
+
+            switch (args.Length)
+            {
+                case 1:
+                    app.Run(args[0], "99999999");
+                    break;
+                case 2:
+                    app.Run(args[0], args[1]);
+                    break;
+                default:
+                    throw new Exception("Wrong amount of parameters");
+            }
         }
     }
 }
