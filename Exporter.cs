@@ -13,7 +13,7 @@ namespace StepanProject
             for (int i = 0; i < products.Count; i++)
             {
                 double priceUSD = checkIfHasCost(products[i]);
-                double priceCZK = priceUSD * double.Parse(rate.Replace(',','.'));
+                double priceCZK = priceUSD * double.Parse(rate);
 
                 toExport.Add(new Row{
                     Date = DateTime.Now.ToString("yyyy.MM.dd-HH:mm:ss"),
